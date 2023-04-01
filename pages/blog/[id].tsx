@@ -1,5 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { getPostData, getSortedPostsData } from '../../libs/posts'
+import { Text } from '@chakra-ui/react'
 
 interface PostData {
     title: string
@@ -15,7 +16,9 @@ const Post: React.FC<PostProps> = ({ postData }) => {
     return (
         <div>
             <h1>{postData.title}</h1>
-            <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+            <Text border={'2px'} borderColor={'gray.400'} rounded={'2xl'} padding={'10'} margin={'10'}>
+                <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+            </Text>
             <small>{postData.date}</small>
         </div>
     )

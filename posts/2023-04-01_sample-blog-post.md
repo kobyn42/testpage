@@ -4,8 +4,6 @@ date: "2023-04-01"
 tags: ["Next.js", "TypeScript", "Markdown"]
 ---
 
-# サンプルブログ記事
-
 これは、サンプルのブログ記事です。Next.js、TypeScript、およびマークダウンを使用して作成されています。
 
 ## Next.jsについて
@@ -29,3 +27,10 @@ TypeScriptは、JavaScriptのスーパーセットであり、静的型チェッ
 - リンク: `[リンクテキスト](https://www.example.com)`のように書くことで、リンクを作成できます。
 - 画像: `![代替テキスト](https://www.example.com/image.jpg)`のように書くことで、画像を挿入できます。
 - 強調: `*強調*`や`_強調_`で囲むことで、斜体にできます。`**強い強調**`や`__強い強調__`で囲むこと
+
+## コード
+```python
+def hello_world():
+    print("Hello World!")
+
+```

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { Heading } from '@chakra-ui/react';
 import { GetStaticProps } from 'next'
 import { getSortedPostsData } from '../libs/posts'
 
@@ -16,7 +17,7 @@ interface BlogProps {
 const Blog: React.FC<BlogProps> = ({ allPostsData }) => {
     return (
         <div>
-            <h1>ブログ一覧ページ</h1>
+            <Heading color={'red'}>ブログ一覧ページ</Heading>
             <ul>
                 {allPostsData.map(({ id, date, title, tags }) => (
                     <li key={id}>
@@ -42,7 +43,7 @@ const Blog: React.FC<BlogProps> = ({ allPostsData }) => {
                 ))}
             </ul>
             <Link href="/">
-                <a>ホームページへ戻る</a>
+                ホームページへ戻る
             </Link>
         </div>
     )
