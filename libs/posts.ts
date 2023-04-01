@@ -57,3 +57,24 @@ export async function getPostData(id: string) {
     ...matterResult.data
   }
 }
+
+export function getAllTags(): string[] {
+  const allPostsData = getSortedPostsData()
+  const tags = new Set<string>()
+
+  allPostsData.forEach(postData => {
+    if (Array.isArray(postData.tags)) {
+      postData.tags.forEach(tag => tags.add(tag))
+    }
+  })
+
+  return Array.from(tags)
+}
+
+export function getPostsByTag(tag: string): any {
+  const allPostsData = getSortedPostsData()
+
+  return allPostsData.filter(postData => {
+    return Array.isArray(postData.tags) && postData.tags.includes(tag)
+  })
+}

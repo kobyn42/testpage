@@ -6,6 +6,7 @@ interface Post {
     id: string
     date: string
     title: string
+    tags: string[]
 }
 
 interface BlogProps {
@@ -17,13 +18,26 @@ const Blog: React.FC<BlogProps> = ({ allPostsData }) => {
         <div>
             <h1>ブログ一覧ページ</h1>
             <ul>
-                {allPostsData.map(({ id, date, title }) => (
+                {allPostsData.map(({ id, date, title, tags }) => (
                     <li key={id}>
                         <Link href={`/blog/${id}`}>
                             <a>{title}</a>
                         </Link>
                         <br />
                         <small>{date}</small>
+                        <br />
+                        {Array.isArray(tags) && (
+                            <ul>
+                                {tags.map(tag => (
+
+                                    <li key={tag}>
+                                        <Link href={`/tags/${tag}`}>
+                                            <a>{tag}</a>
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
                     </li>
                 ))}
             </ul>
