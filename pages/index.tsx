@@ -6,10 +6,10 @@ const Home: React.FC = () => {
       <h1>ホームページ</h1>
       <nav>
         <Link href="/about">
-          <a>自己紹介ページ</a>
+          自己紹介ページ
         </Link>
         <Link href="/blog">
-          <a>ブログ一覧ページ</a>
+          ブログ一覧ページ
         </Link>
       </nav>
     </div>

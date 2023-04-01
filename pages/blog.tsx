@@ -21,7 +21,7 @@ const Blog: React.FC<BlogProps> = ({ allPostsData }) => {
                 {allPostsData.map(({ id, date, title, tags }) => (
                     <li key={id}>
                         <Link href={`/blog/${id}`}>
-                            <a>{title}</a>
+                            {title}
                         </Link>
                         <br />
                         <small>{date}</small>
@@ -32,7 +32,7 @@ const Blog: React.FC<BlogProps> = ({ allPostsData }) => {
 
                                     <li key={tag}>
                                         <Link href={`/tags/${tag}`}>
-                                            <a>{tag}</a>
+                                            {tag}
                                         </Link>
                                     </li>
                                 ))}

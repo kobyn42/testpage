@@ -17,7 +17,7 @@ export default function TagPage({ tag, posts }: Props) {
                 {posts.map(({ id, date, title }) => (
                     <li key={id}>
                         <Link href={`/blog/${id}`}>
-                            <a>{title}</a>
+                            {title}
                         </Link>
                         <br />
                         <small>{date}</small>
