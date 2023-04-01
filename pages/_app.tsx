@@ -1,5 +1,6 @@
 // pages/_app.js
 import { ChakraProvider } from '@chakra-ui/react'
+import 'highlight.js/styles/default.css'
 
 const App = ({ Component, pageProps }) => {
     return (

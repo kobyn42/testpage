@@ -3,7 +3,10 @@ import path from 'path'
 import matter from 'gray-matter'
 import { unified } from 'unified'
 import remarkParse from 'remark-parse'
+import rehypeHighlight from 'rehype-highlight';
 import remarkHtml from 'remark-html'
+import remarkRehype from 'remark-rehype';
+import rehypeStringify from 'rehype-stringify';
 
 const postsDirectory = path.join(process.cwd(), 'posts')
 
@@ -47,7 +50,9 @@ export async function getPostData(id: string) {
 
   const processor = unified()
     .use(remarkParse)
-    .use(remarkHtml)
+    .use(remarkRehype)
+    .use(rehypeHighlight)
+    .use(rehypeStringify)
   const processedContent = await processor.process(matterResult.content)
   const contentHtml = processedContent.toString()
 
