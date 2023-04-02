@@ -7,6 +7,7 @@ import rehypeHighlight from 'rehype-highlight';
 import remarkHtml from 'remark-html'
 import remarkRehype from 'remark-rehype';
 import rehypeStringify from 'rehype-stringify';
+import ReactMarkdown from 'react-markdown';
 
 const postsDirectory = path.join(process.cwd(), 'posts')
 
@@ -24,7 +25,6 @@ export const getSortedPostsData = () => {
 
     const fullPath = path.join(postsDirectory, fileName)
     const fileContents = fs.readFileSync(fullPath, 'utf8')
-
     const matterResult = matter(fileContents)
 
     return {
@@ -55,10 +55,11 @@ export async function getPostData(id: string) {
     .use(rehypeStringify)
   const processedContent = await processor.process(matterResult.content)
   const contentHtml = processedContent.toString()
+  const markdown = matterResult.content
 
   return {
     id,
-    contentHtml,
+    markdown,
     ...matterResult.data
   }
 }

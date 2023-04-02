@@ -1,11 +1,16 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { getPostData, getSortedPostsData } from '../../libs/posts'
-import { Text, VStack } from '@chakra-ui/react'
+import { Text, VStack, Box, Heading, UnorderedList, ListItem, ListIcon } from '@chakra-ui/react'
+import { ReactMarkdown } from 'react-markdown/lib/react-markdown'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { atomDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import { CheckCircleIcon } from '@chakra-ui/icons';
+
 
 interface PostData {
     title: string
     date: string
-    contentHtml: string
+    markdown: string
 }
 
 interface PostProps {
@@ -17,9 +22,43 @@ const Post: React.FC<PostProps> = ({ postData }) => {
         <div>
             <VStack>
                 <h1>{postData.title}</h1>
-                <Text border={'2px'} borderColor={'gray.400'} rounded={'2xl'} padding={'10'} margin={'10'} maxWidth={'800'}>
-                    <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
-                </Text>
+                <Box border={'2px'} borderColor={'gray.400'} rounded={'2xl'} padding={'10'} margin={'10'} maxWidth={'800'}>
+                    <ReactMarkdown
+                        children={postData.markdown}
+                        components={{
+                            code: ({ node, inline, className, children, ...props }) => {
+                                const match = /language-(\w+)/.exec(className || '');
+                                return !inline && match ? (
+                                    <SyntaxHighlighter
+                                        children={String(children).replace(/\n$/, '')}
+                                        language={match[1]}
+                                        style={atomDark}
+                                        PreTag="div"
+                                        {...props}
+                                    />
+                                ) : (
+                                    <code className={className} {...props}>
+                                        {children}
+                                    </code>
+                                );
+                            },
+                            h2: ({ node, children, ...props }) => (
+                                <Heading as="h2" size="md" mt="4" mb="2" {...props}>
+                                    {children}
+                                </Heading>
+                            ),
+                            ul: ({ children }) => (
+                                <UnorderedList>{children}</UnorderedList>
+                            ),
+                            li: ({ children }) => (
+                                <ListItem>
+                                    {children}
+                                </ListItem>
+                            )
+                        }}
+                    />
+                </Box>
+                {/* </Text> */}
                 <small>{postData.date}</small>
             </VStack>
         </div>
